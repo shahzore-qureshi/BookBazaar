@@ -8,6 +8,8 @@ How To Obtain
 
 Call this command in Terminal:
 
+```
 git clone https://github.com/tcnj-wics/BookBazaar.git
+```
 
 Or if you are using a GitHub client, simply clone the URL https://github.com/tcnj-wics/BookBazaar.git.
