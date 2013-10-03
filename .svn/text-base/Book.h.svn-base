@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include "Item.h"
+using namespace std;
+
+class Book : public Item {
+
+	private:
+	string author;
+	string publisher;
+    string edition;
+	double ISBN;
+	
+	public:
+	Book(string Uname = "", string Ucondition = "", int UsellType = 0, string Useller = "", double UsellPrice = 0.0, double UendPrice = 0.0, string UCourseTag = "", int UCourseNumber = 0, DateTime BookTime_Remaining = DateTime(), DateTime BookDate_Created = DateTime(), string auth = "", string publish = "", string edition = "", double isbn = 0.0);
+	string getAuthor();
+	void setAuthor(string auth);
+	string getPublisher();
+	void setPublisher(string publish);
+	string getEdition();
+	void setEdition(string edit);
+	double getISBN();
+	void setISBN(double isbn);
+	
+	friend istream & operator >>(istream &, Book &);
+	friend ostream & operator <<(ostream &, Book &);	
+        
+    string toFile();
+	bool compareTo(Book);
+	
+};

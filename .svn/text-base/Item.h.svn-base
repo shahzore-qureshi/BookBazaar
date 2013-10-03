@@ -1,0 +1,69 @@
+// Name:
+// Course: CSC 260-2 
+// Semester: Fall 2011
+// Instructor: Dr. Pulimood
+// Assignment N
+// Description: put a brief description of the program here
+// Filename: assgnNInit.cpp
+// Last modified on: date
+#ifndef Importer_Item_h
+#define Importer_Item_h
+
+#include <iostream>
+#include "DateTime.h"
+using namespace std;
+
+class Item {
+
+	protected:
+	string name;
+	string condition;
+	int sellType;
+	string seller;
+	double sellPrice;
+    double endPrice;
+	string courseTag;
+    int courseNumber;
+    DateTime timeRemaining;
+    DateTime dateCreated;
+    
+	public:
+	Item(string Uname = "", string Ucondition = "", int UsellType = 0, string Useller = "", double UsellPrice = 0.0, double UendPrice = 0.0, string UCourseTag = "", int UCourseNumber = 0, DateTime BookTime_Remaining = DateTime(), DateTime BookDate_Created = DateTime());
+	
+    //Setters
+    void setName(string);
+    void setCourseTag(string);
+    void setCondition(string);
+    void setSellType(int);
+    void setSeller(string);
+    void setCourseNumber(int);
+    void setSellPrice(double);
+    void setEndPrice(double);
+    void setDateCreated(DateTime);
+    void setTimeRemaining(DateTime);
+    
+    //Getters
+    string getName();
+    string getCourseTag();
+    string getCondition();
+    int getSellType();
+    string getSeller();
+    string getCourse();
+    int getCourseNumber();
+    double getSellPrice();
+    double getEndPrice();
+    
+    void subtractOneSecond();       //subtracts on second, will change isDone to true when all time values are zero
+    
+    bool isDone();
+    string getTimeRemaining();
+    string getDateCreated();
+    
+    string toString();          //Gets information of book
+    string toFile();
+    
+    friend istream & operator >> (istream&, Item&);
+	friend ostream & operator << (ostream&, Item);
+};
+
+#endif

@@ -1,0 +1,4 @@
+"Dumbledore","Albus","headmaster@tcnj.edu","fawkes","lemondrops","12","7","2011","22","56","59","0"
+"Hagrid","Rubeus","potterh7@tcnj.edu","norbert","buckbeack","12","7","2011","23","10","49","0"
+"Qureshi","Shahzore","qureshs1@tcnj.edu","shaq1nj","lala","10","3","2013","12","16","34","0"
+"Landblob","Oakland","hoffins1@tcnj.edu","asdflolcow","nnniiinnneee","10","3","2013","12","27","29","0"

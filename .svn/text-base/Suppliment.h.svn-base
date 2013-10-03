@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include "Item.h"
+#include "DateTime.h"
+using namespace std;
+
+class Suppliment : public Item {
+
+	private:
+	string supplimentOf;
+	
+	public:
+	Suppliment(string Uname = "", string Ucondition = "", int UsellType = 0, string Useller = "", double UsellPrice = 0.0, double UendPrice = 0.0, string UCourseTag = "", int UCourseNumber = 0, DateTime BookTime_Remaining = DateTime(), DateTime BookDate_Created = DateTime(), string suppOf = "");
+	string getSupplimentOf();
+	void setSupplimentOf(string suppOf);
+	string toFile();
+	bool compareTo (Suppliment);
+    
+    friend istream & operator >> (istream&, Suppliment&);
+	friend ostream & operator << (ostream&, Suppliment&);
+	
+};

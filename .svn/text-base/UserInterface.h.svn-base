@@ -1,0 +1,66 @@
+//
+//  UserInterface.h
+//  BookBazaar
+//
+//  Created by Steven Zilberberg on 11/30/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#include <iostream>
+#include <sstream>
+#include "Member.h"
+#include "Book.h"
+#include "Stack.cpp"
+using namespace std;
+
+const string kType_Title = "title";
+const string kType_Author = "author";
+const string kType_Class = "class tag";
+const string kType_ISBN = "isbn";
+
+const char kReturn = 'r';
+
+const string kFile_Member = "Members.dat";
+const string kFile_Book = "MasterItemList.dat";
+
+class UserInterface
+{
+private:
+    //Master Member List
+    Member *allMembers;
+    int indexAllMembers;
+    
+    //Master Book List
+    Item *allItems;
+    int indexallItems;
+    
+    //Current User
+    Member currentMember;
+    Item *itemList;
+    int indexitemList;
+//------------------------------------------------------
+    //File Checks
+    bool check(string);
+    bool check(string, int&);
+    
+    string allToLower(string);                  //Converts string to lowercase
+    string allToUpper(string);                  //Converts string to uppercase
+    string getInput(string);
+    char getInputChar(string);
+//------------------------------------------------------
+    //******Menus******
+    int menuSearchParamters();
+	int mainMenuParameters();
+   	int postMenuParameters();
+	
+    template<class T>
+    bool search(string, string, Stack<T>&);
+    void searchDatabase();
+    
+    //*****Parsers****
+    Member parseMember(string);                 //parse member info string
+    Book parseBook(string);                     //parse book info string
+public:
+    bool start(string&);
+    void menuLoginScreen();
+};

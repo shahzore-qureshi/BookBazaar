@@ -1,0 +1,31 @@
+// Name:Steven Zilberberg
+// Course: CSC 260-2 
+// Semester: Fall 2011
+// Instructor: Dr. Pulimood
+// Exerice 6
+// Description: Header file for stack template class
+// Filename: Stack.h
+// Last modified on: 11/3/11
+
+#ifndef myStackStuff_Stack_h
+#define myStackStuff_Stack_h
+
+const int stackSize = 10;
+
+template<class T>
+class Stack
+{
+private:
+    T items[stackSize];
+    int stackIndex;
+public:
+    Stack();
+    void push(T);
+    void pop();
+    T peek();
+    int size();
+    bool isFull();
+    bool isEmpty();
+};
+
+#endif

@@ -1,0 +1,7 @@
+"Book","Harry Potter","CSC","213","New","0","shaq1nj","100","0","7","0","0","0","10","3","2013","12","18","56","0","J.K. Rowling","1","I dont know","978"
+"Book","The 12 Uses of Dragon's blOOD","AWE","123","Fantastic","1","fawkes","0","0","2","0","0","0","12","7","2011","22","43","6","0","Albus Dumbledore","7","Dumbledore Inc.","1234567890123"
+"Book","Harry Potter and the Sorcerer's Stone","AWE","100","Fantastic","0","firebolt","0","0","1","0","0","0","12","7","2011","23","12","17","0","JK Rowling","1","UK","1234567890123"
+"Manual","Fantastic Beasts and Where to Find Them","CMC","200","Marvelous","2","firebolt","0","0","2","0","0","0","12","7","2011","23","12","20","0","Care of Magical Creatures","UK","1234567890123"
+"Supplement","SUPP","TAG","324","USED","1","zilberb2","0","0","12","7","2011","19","39","4","0","12","7","2011","19","39"
+"Supplement","Quidditch Through The Ages","QUI","300","Couldn't be better","1","firebolt","0","0","3","0","0","0","12","7","2011","23","13","48","0","Quidditch..."
+"Book","Mor","CSC","999","Purple","0","asdflolcow","1e+14","1","1","0","0","0","10","3","2013","12","29","27","0","Toke","3","Me","973"

@@ -1,0 +1,191 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include "Book.h"
+using namespace std;
+
+Book::Book(string Uname, string Ucondition, int UsellType, string Useller, double UsellPrice, double UendPrice, string UCourseTag, int UCourseNumber, DateTime BookTime_Remaining, DateTime BookDate_Created, string auth, string publish, string edit, double isbn) : Item(Uname, Ucondition, UsellType, Useller, UsellPrice, UendPrice, UCourseTag, UCourseNumber, BookTime_Remaining, BookDate_Created) {
+
+	author = auth;
+	publisher = publish;
+    edition = edit;
+	ISBN = isbn;
+
+}
+
+string Book::getAuthor() {
+
+	return author;
+
+}
+
+void Book::setAuthor(string auth) {
+
+	author = auth;
+	return;
+
+}
+
+string Book::getEdition() {
+    
+	return author;
+    
+}
+
+void Book::setEdition(string edit) {
+    
+	edition = edit;
+	return;
+    
+}
+
+string Book::getPublisher() {
+
+	return publisher;
+
+}
+
+void Book::setPublisher(string publish) {
+
+	publisher = publish;
+	return;
+
+}
+
+double Book::getISBN() {
+
+	return ISBN;
+
+}
+
+void Book::setISBN(double isbn) {
+
+	ISBN = isbn;
+	return;
+}
+
+istream & operator >> (istream & stream, Book & newBook)
+{
+    string input;
+    cout << "Book Name: ";
+    getline(stream, newBook.name);
+
+    
+    cout << "Edition: ";
+    getline(stream, input);
+    newBook.edition = atoi(input.c_str());
+
+    
+    cout << "Author: ";
+    getline(stream, newBook.author);
+
+    
+    do
+    {
+        cout << "ISBN: ";
+        getline(stream, input);
+    }while(input.length() != 13 && input.find("-") == string::npos);
+    newBook.ISBN = atoll(input.c_str());
+
+    
+    cout << "Condition: ";
+    getline(stream, newBook.condition);
+
+    
+    cout << "Course Tag: ";
+    getline(stream, newBook.courseTag);
+
+    
+    cout << "Course Number: ";
+    stream >> newBook.courseNumber;
+    stream.ignore(1);
+
+    
+    do
+    {
+        cout << "Auction/Sell/Trade: ";
+        getline(stream, input);
+        for(int c = 0; c < input.length(); c++)
+        {
+            input[c] = tolower(input[c]);
+        }
+    }while(input != "auction" && input != "sell" && input != "trade");
+    
+    //create switch statement for types
+    newBook.sellType = 0;
+
+    
+    do
+    {
+        cout << "Start Price: $";
+        stream >> newBook.sellPrice;
+    }while(newBook.sellPrice < 0);
+
+    
+    if(newBook.sellType == 0)
+    {
+        do
+        {
+            cout << "End Price (-1 if no end price is desired)" << endl;
+            stream >> newBook.endPrice;
+        }while(newBook.endPrice < 0 && newBook.endPrice != -1);
+    }
+    else
+    {
+        newBook.endPrice = -1;
+    }
+
+    
+    int numHours = 0;
+    do
+    {
+        cout << "Number of hours: ";
+        stream >> numHours;
+    }while(numHours <= 0);
+    stream.ignore(1);
+
+     
+    newBook.dateCreated = DateTime();
+
+    
+    return stream;
+}
+
+ostream & operator <<(ostream & output, Book & aBook)
+{
+    output << aBook.getName() << endl;
+    output << aBook.getEdition() << endl;
+    output << aBook.getAuthor() << endl;
+    output << aBook.getISBN() << endl;
+    output << aBook.getCourse() << endl;
+    output << aBook.getCondition() << endl;
+    output << aBook.getSellType() << endl;
+    output << aBook.getSellPrice() << endl;
+    output << aBook.getEndPrice() << endl;
+    output << aBook.getDateCreated() << endl;
+    output << aBook.timeRemaining.getDateTime() << endl;
+
+    
+    return output;
+}
+
+string Book::toFile()
+{
+    stringstream output;
+    
+    output << "Book" << "\",\"" << Item::toFile();
+    output << "\",\"" << getAuthor() << "\",\"" << getEdition() << "\",\"" << getPublisher() << "\",\"" << getISBN();
+    
+    return output.str();
+}
+
+bool Book::compareTo(Book rhs) {
+
+	if ((name == rhs.name) && (condition == rhs.condition) && (sellType == rhs.sellType) && (seller == rhs.seller) && (sellPrice == rhs.sellPrice)
+	&& (endPrice == rhs.endPrice) && (timeRemaining == rhs.timeRemaining) && (dateCreated == rhs.dateCreated) && (courseTag == rhs.courseTag)
+	&& (courseNumber == rhs.courseNumber) && (author == rhs.author) && (publisher == rhs.publisher) && (edition == rhs.edition) && (ISBN = rhs.ISBN))
+	return true;
+	else
+	return false;
+
+}

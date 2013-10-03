@@ -1,0 +1,565 @@
+//
+//  UserInterface.cpp
+//  BookBazaar
+//
+//  Created by Steven Zilberberg on 11/30/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#include "UserInterface.h"
+
+bool UserInterface::check(string file)          //Checks for file existance
+{
+    ifstream inFile(file.c_str());
+    if(inFile)
+    {
+        inFile.close();
+        return true;
+    }
+    else
+    {
+        inFile.close();
+        return false;
+    }
+}
+
+bool UserInterface::check(string file, int& number)     //Checks for file existance and counts num lines
+{
+    ifstream inFile(file.c_str());
+    if(inFile)
+    {
+        string line;
+        while(getline(inFile, line))
+        {
+            number++;
+        }
+        return true;
+    }
+    else
+        return false;
+    inFile.close();
+}
+
+string UserInterface::allToUpper(string word)
+{
+    for(int c = 0; c < word.length(); c++)
+    {
+        word[c] = toupper(word[c]);
+    }
+    return word;
+}
+
+string UserInterface::getInput(string msg)
+{
+    cout << msg;
+    string input = "";
+    getline(cin, input);
+    return input;
+}
+
+char UserInterface::getInputChar(string msg)
+{
+    string input = "";
+    do
+    {
+        cout << msg;
+        getline(cin, input);
+    }while((int)input.length() > 1);
+    
+    return (tolower(input[0]));
+}
+
+Member UserInterface::parseMember(string input)        //Parses member line and return real member instance
+{
+    stringstream memberInput(input);        //stream (acts like file to easily parse through line)
+    string info = "";
+    Member newMember = Member();
+    DateTime memberCreationDate = DateTime();
+    memberCreationDate.setIsDateTime(true);
+    int infoCount = 0;
+    while(getline(memberInput, info, ','))
+    {
+        int begin = (int)info.find('\"') + 1;
+        info = info.substr(begin, info.length() - 2 );
+        switch(infoCount)                               //depending on which "item" is retrieved, that piece is put into the object
+        {
+            case 0:
+            {
+                newMember.setLastName(info);
+                break;
+            }
+            case 1:
+            {
+                newMember.setFirstName(info);
+                break;
+            }
+            case 2:
+            {
+                newMember.setEmail(info);
+                break;
+            }
+            case 3:
+            {
+                newMember.setUsername(info);
+                break;
+            }
+            case 4:
+            {
+                newMember.setPassword(info);
+                break;
+            }
+            case 5:
+            {
+                memberCreationDate.setMonth(atoi(info.c_str()));
+                break;
+            }
+            case 6:
+            {
+                memberCreationDate.setDay(atoi(info.c_str()));
+                break;
+            }
+            case 7:
+            {
+                memberCreationDate.setYear(atoi(info.c_str()));
+                break;
+            }
+            case 8:
+            {
+                memberCreationDate.setHour(atoi(info.c_str()));
+                break;
+            }
+            case 9:
+            {
+                memberCreationDate.setMinute(atoi(info.c_str()));
+                break;
+            }
+            case 10:
+            {
+                memberCreationDate.setSecond(atoi(info.c_str()));
+                break;
+            }
+            case 11:
+            {
+                memberCreationDate.setMilliseconds(atoi(info.c_str()));
+                break;
+            }
+        }
+        infoCount++;
+    }
+    newMember.setCreationTime(memberCreationDate);  //Sets the creation time
+    return newMember;       //returns member
+}
+
+Book UserInterface::parseBook(string input)            //parses book line and returns real book instance
+{
+    stringstream bookInput(input);        //stream (acts like file to easily parse through line)
+    string info = "";
+    Book newBook = Book();
+    DateTime bookCreationDate = DateTime();
+    DateTime bookTimeRemaining = DateTime();
+    bookCreationDate.setIsDateTime(true);
+    bookTimeRemaining.setIsTime(true);
+    int infoCount = 0;
+    while(getline(bookInput, info, ','))
+    {
+        int begin = (int)info.find('\"') + 1;
+        info = info.substr(begin, info.length() - 2 );
+        switch(infoCount)                               //depending on which "item" is retrieved, that piece is put into the object
+        {
+            case 0:
+            {
+                newBook.setName(info);
+                break;
+            }
+            case 1:
+            {
+                newBook.setEdition(info);
+            }
+            case 2:
+            {
+                newBook.setAuthor(info);
+                break;
+            }
+            case 3:
+            {
+                newBook.setISBN(atoll(info.c_str()));
+                break;
+            }
+            case 4:
+            {
+                newBook.setCourseTag(info);
+                break;
+            }
+            case 5:
+            {
+                newBook.setCourseNumber(atoi(info.c_str()));
+                break;
+            }
+            case 6:
+            {
+                newBook.setCondition(info);
+                break;
+            }
+            case 7:
+            {
+                newBook.setSellType(atoi(info.c_str()));
+                break;
+            }
+            case 8:
+            {
+                newBook.setSeller(info);
+                break;
+            }
+            case 9:
+            {
+                newBook.setSellPrice(atof(info.c_str()));
+                break;
+            }
+            case 10:
+            {
+                newBook.setEndPrice(atof(info.c_str()));
+                break;
+            }
+            case 11:
+            {
+                bookTimeRemaining.setHour(atoi(info.c_str()));
+                break;
+            }
+            case 12:
+            {
+                bookTimeRemaining.setMinute(atoi(info.c_str()));
+                break;
+            }
+            case 13:
+            {
+                bookTimeRemaining.setSecond(atoi(info.c_str()));
+                break;
+            }
+            case 14:
+            {
+                bookTimeRemaining.setMilliseconds(atoi(info.c_str()));
+                break;
+            }
+            case 15:
+            {
+                bookCreationDate.setMonth(atoi(info.c_str()));
+                break;
+            }
+            case 16:
+            {
+                bookCreationDate.setDay(atoi(info.c_str()));
+                break;
+            }
+            case 17:
+            {
+                bookCreationDate.setYear(atoi(info.c_str()));
+                break;
+            }
+            case 18:
+            {
+                bookCreationDate.setHour(atoi(info.c_str()));
+                break;
+            }
+            case 19:
+            {
+                bookCreationDate.setMinute(atoi(info.c_str()));
+                break;
+            }
+            case 20:
+            {
+                bookCreationDate.setSecond(atoi(info.c_str()));
+                break;
+            }
+            case 21:
+            {
+                bookCreationDate.setMilliseconds(atoi(info.c_str()));
+                break;
+            }
+        }
+        infoCount++;
+    }
+    newBook.setTimeRemaining(bookTimeRemaining);  //Sets the time remaining
+    newBook.setDateCreated(bookCreationDate);       //Sets the creation date
+    return newBook;       //returns book
+}
+
+int UserInterface::menuSearchParamters()
+{
+    cout << "Search by -" << endl;
+    cout << "\t 1 - Title Name" << endl;
+    cout << "\t 2 - Author Name" << endl;
+    cout << "\t 3 - Class Tag" << endl;
+    cout << "\t 4 - ISBN" << endl;
+    cout << "\t r - Return" << endl;
+    
+    cout << "Option: ";
+    return 5;
+}
+
+int UserInterface::mainMenuParamters()
+{
+	cout << "Welcome to Lions BookBazaar. Please select a function";
+    cout << "\t 1 - Post a Book" << endl;
+    cout << "\t 2 - Modify Postings" << endl;
+    cout << "\t 3 - Search" << endl;
+    cout << "\t 4 - Account Settings" << endl;
+    cout << "\t r - Logout" << endl;
+    cout << "Option: ";
+    return 5;
+}
+
+int UserInterface::postMenuParamters()
+{
+	cout << "What would you like to post?";
+    cout << "\t 1 - Book" << endl;
+    cout << "\t 2 - Manual" << endl;
+    cout << "\t 3 - Suppliment" << endl;
+    cout << "\t r - Return" << endl;
+    cout << "Option: ";
+    return 4;
+}
+
+void UserInterface::searchDatabase()
+{
+    char option;
+    string type = "";
+    string input = "";
+    Stack<int> matches = Stack<int>();
+    do
+    {
+        bool stop = false;
+        menuSearchParamters();
+        option = getInputChar("");
+        switch (option)
+        {
+            case '1':
+            {
+                type = kType_Title;
+                string targetTitle = "";
+                targetTitle = getInput("Please Enter the name of the book as it would appear on book (type \'r\' to return): ");
+                if(targetTitle.length() == 1 && targetTitle[0] == kReturn)
+                {
+                    type = "";
+                }
+                break;
+            }
+            case '2':
+            {
+                type = kType_Author;
+                string targetAuthor = "";
+                targetAuthor = getInput("Please Enter the Full Name of the Author as it would appear on book (type \'r\' to return): ");
+                if(targetAuthor.length() == 1 && targetAuthor[0] == kReturn)
+                {
+                    type = "";
+                }
+                break;
+            }
+            case '3':
+            {
+                type = kType_Class;
+                string classSymbol = "";
+                string classNumber = "";
+                do 
+                {
+                    classSymbol = getInput("Please enter the 3 letter class Symbol (type \'r\' to return): ");
+                    if(classSymbol.length() == 1 && classSymbol[0] == kReturn)
+                    {
+                        type = "";
+                        stop = true;
+                    }
+                    classNumber = getInput("Please Enter the class number: ");
+                }while ((classSymbol.length() < 3 || classSymbol.length() > 3) && !stop);
+                break;
+            }
+            case '4':
+            {
+                type = kType_ISBN;
+                do
+                {
+                    input = getInput("Please enter the 13 digit ISBN number (\'r\' to return): ");
+                    if(input.length() == 1 && input[0] == kReturn)
+                    {
+                        stop = true;
+                        type = "";
+                    }
+                }while(input.length() != 13 && !stop);
+                break;
+            }
+        }
+        if(!stop)
+        {
+            if(type != "")
+            {
+                stringstream msg;
+                bool hasMatches = search(type, input, matches);
+                if(hasMatches)
+                {
+                    int targetIndex = 0;
+                    msg << matches.size() << " Matches for " << type << " " << input;
+                    cout << "***************" << msg.str() << "***************" << endl;
+                    while(!matches.isEmpty())
+                    {
+                        targetIndex = matches.peek();
+                        if(targetIndex != -1)
+                        {
+                            //cout << allBooks[targetIndex].toString() << endl;
+                            cout << "********************************************" << endl;
+                            matches.pop();
+                        }
+                    }
+                }
+                else
+                {
+                    cout << "***************" << "0 Matches for " << input << "***************" << endl;
+                }
+            }
+        }
+    }while(option != kReturn);
+}
+
+template<class T>
+bool UserInterface::search(string type, string data, Stack<T>& matches)
+{
+    if(type == kType_Title)
+    {
+        string targetTitle = getInput("Pleae input title of the book to search (\'r\' to return)");
+        return true;
+    }
+    else if(type == kType_Author)
+    {
+        return true;
+    }
+    else if(type == kType_Class)
+    {
+        return true;
+    }
+    else if(type == kType_ISBN)
+    {
+        long targetISBN = 0;
+        try
+        {
+            targetISBN = atoll(data.c_str());
+        }
+        catch(exception e)
+        {
+            cout << "ISBN number must be all integers! You inputted: " << data << endl;
+            return false;
+        }
+        /*for(int c = 0; c < indexallItems; c++)
+        {
+            //if(allItems[c].getISBN() == targetISBN)
+            //    matches.push(c);
+        }*/
+        if(matches.isEmpty())
+            return false;
+        else
+            return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+//************************************************************************************************
+//************************************************************************************************
+//************************************************************************************************
+
+bool UserInterface::start(string& errorMsg)
+{
+    ifstream inFile(kFile_Member.c_str());
+    if(!inFile)
+    {
+        errorMsg += kFile_Member + " Not Found";
+        return false;
+    }
+    else
+    {
+        string line = "";
+        for(int c = 0; getline(inFile, line); c++)
+        {
+            allMembers[c] = parseMember(line);
+        }
+    }
+    inFile.close();
+    ifstream inFile2(kFile_Book.c_str());
+    if(!inFile2)
+    {
+        errorMsg += kFile_Book + " Not Found!";
+        return false;
+    }
+    else
+    {
+        string line = "";
+        for(int c = 0; getline(inFile2, line); c++)
+        {
+            
+        }
+    }
+    inFile2.close();
+    return true;
+}
+
+void UserInterface::menuLoginScreen()
+{
+    bool endMenu = false;
+    while(endMenu == false)
+    {
+        cout << "Please enter: \n1. If you're a returning user \n2. If you're a new user. " << endl;
+        int menuSelection;
+        cin >> menuSelection;
+        
+        if(menuSelection == 1)
+        {
+            string returningUser;
+            string passcode;
+            cout << "Please enter your username: " << endl;
+            cin >> returningUser;
+            cout << "Please enter your password: " << endl;
+            cin >> passcode;
+            for(int i = 0; i < indexAllMembers; i++)
+            {
+                if(allMembers[i].getUsername() == returningUser)
+                {
+                    cout << "User found." << endl;
+                    if(allMembers[i].getPassword() == passcode)
+                    {
+                        cout << "Password confirmed" << endl;
+                        return;
+                    }
+                }                   
+            }
+            
+            cout << "Invalid username or password." << endl;
+        }
+        
+        else if(menuSelection == 2)
+        {
+            //NOTE: THIS FUNCTION DOES NOT YET SAVE USER DATA. WE STILL NEED TO COMPLETE THIS FUNCTION
+            cout << "NOTE: THIS FUNCTION DOES NOT YET SAVE USER DATA. WE STILL NEED TO COMPLETE THIS FUNCTION" << endl;
+            string  firstName1, lastName1, email1, username1, password1;
+            cout << "Please enter your first name" << endl;
+            cin >> firstName1;
+            cout << "Please enter your last name" << endl;
+            cin >> lastName1;
+            cout << "Please enter your email address" << endl;
+            cin >> email1;
+            cout << "Please enter your user name" << endl;
+            cin >> username1;
+            cout << "Please enter your password" << endl;
+            cin >> password1;
+            DateTime datetime1; //How do you create the date/time when created?
+            Member newMember(firstName1, lastName1, email1, username1, password1, datetime1);
+            //Member should be added to the list
+            cout << "Member is added to the system." << endl;
+        }
+        
+        else if(cin.fail())
+        {
+            cout << "Invalid entry." << endl;
+            cin.clear();        
+        }
+        
+        else
+            cout << "Invalid entry." << endl;           
+    }
+}
