@@ -13,3 +13,14 @@ git clone https://github.com/tcnj-wics/BookBazaar.git
 ```
 
 Or if you are using a GitHub client, simply clone the URL https://github.com/tcnj-wics/BookBazaar.git.
+
+How To Compile and Run
+==========
+
+Call these commands:
+
+```
+g++ -o main.out *.cpp
+
+./main.out
+```
