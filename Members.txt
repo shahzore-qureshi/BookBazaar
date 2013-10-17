@@ -2,3 +2,5 @@
 "Hagrid","Rubeus","potterh7@tcnj.edu","norbert","buckbeack","12","7","2011","23","10","49","0"
 "Qureshi","Shahzore","qureshs1@tcnj.edu","shaq1nj","lala","10","3","2013","12","16","34","0"
 "Landblob","Oakland","hoffins1@tcnj.edu","asdflolcow","nnniiinnneee","10","3","2013","12","27","29","0"
+"Oakley","Glen","oakleyg1@tcnj.edu","goakley","asdf","10","7","2013","11","43","56","0"
+"Oakley","Glen","oakleyg1@tcnj.edu","goakley","asdf","10","7","2013","11","47","57","0"

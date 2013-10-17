@@ -127,7 +127,7 @@ istream & operator >> (istream & stream, Book & newBook)
     {
         cout << "Auction/Sell/Trade: ";
         getline(stream, input);
-        for(int c = 0; c < input.length(); c++)
+        for(unsigned int c = 0; c < input.length(); c++)
         {
             input[c] = tolower(input[c]);
         }

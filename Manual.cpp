@@ -97,7 +97,7 @@ istream & operator >> (istream& stream, Manual& aManual)
         cout << "Auction/Trade/Sale: ";
         getline(stream, input);
     }while(input != "auction" && input != "trade" && input != "sale");
-    for(int c = 0; c < input.length(); c++)
+    for(unsigned int c = 0; c < input.length(); c++)
     {
         input[c] = tolower(input[c]);
     }
