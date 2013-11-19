@@ -1,0 +1,10 @@
+# python cache
+__pycache__
+*.pyc
+
+# databases (all of them)
+*.db
+*.db3
+*.sql
+*.sqlite3
+
