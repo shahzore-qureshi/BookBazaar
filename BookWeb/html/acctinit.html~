@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Account initialization</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>Account Initialization</h1>
+    <form method="post" action="/acctinit_submit">{% csrf_token %}
+      <p>Please enter your name:</p>
+      First:<input type="text" name="firstname" />
+      Last:<input type="text" name="lastname" />
+      <br>
+      Password:<input type="text" name="p1" />
+      <br>
+      Confirm Password:<input type="text" name="p2" />
+      <input type="submit" name="Submit" value="Submit" />
+    </form>
+  </body>
+</html>
