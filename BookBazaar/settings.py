@@ -105,9 +105,9 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.RemoteUserBackend',
-)
+#AUTHENTICATION_BACKENDS = (
+#    'django.contrib.auth.backends.RemoteUserBackend',
+#)
 
 ROOT_URLCONF = 'BookWeb.urls'
 
