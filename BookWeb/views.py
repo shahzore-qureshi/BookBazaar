@@ -2,40 +2,44 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 import logging
 
-def test(request):
-    #hi = Course.objects.all()
-    html = "<html><body>UNDERGROUND RIVERS</body></html>"
-    return HttpResponse(html)
-
-def acctinit(request):
-    return render(request, "html/acctinit.html", {})
-
-def acctinit_submit(request):
-    #template = loader.get_template("html/acctinit_submit.html")
-    #return HttpResponse(template.render({request}))
-    u1 = User.objects.create_user(request.POST["username"], request.POST["email"], request.POST["p1"])
-    #u1 = User.objects.create_user('user', 'yilo', 'pw')
-    u1.save()
-
-    #return render(request, "html/acctinit_submit.html", {'firstname':request.POST["firstname"]})
-    return acct_login(request)
-def acct_login(request):
-    user = authenticate(username='mama', password='mama')
-    status = 'bitch'
-    if user is not None:
-      # the password verified for the user
-      if user.is_active:
-          print("User is valid, active and authenticated")
-          status = 'valid!' 
-      else:
-          print("The password is valid, but the account has been disabled!")
-          status = 'disabled!'
+def home(request):
+    if request.user.is_authenticated():
+      return render(request, "html/home.html", {})
     else:
-      # the authentication system was unable to verify the username and password
-      status = 'POOOP'
-  
-    return render(request, "html/acctinit_submit.html", {'firstname':status})
-     
+      return login(request)
+
+def create_user(request):
+    if request.method == 'POST':
+      user = User.objects.create_user(request.POST["username"], request.POST["email"], request.POST["password"])
+      user.save()
+      return login(request)
+    elif request.method == 'GET':
+      return render(request, "html/create_user.html", {})
+
+def login(request):
+    if request.method == 'POST':
+      user = authenticate(username=request.POST["username"], password=request.POST["password"])
+      status = 'failed'
+      if user is not None:
+        # the password verified for the user
+        if user.is_active:
+          print("User is valid, active and authenticated")
+          status = 'valid'
+          auth_login(request, user)
+          return home(request)
+        else:
+          print("The password is valid, but the account has been disabled!")
+          status = 'disabled'
+      else:
+        # the authentication system was unable to verify the username and password
+        status = 'failed'
+      return render(request, "html/login.html", {'status':status})
+    elif request.method == 'GET':
+      return render(request, "html/login.html", {'status':''})
+
+def logout(request):
+    auth_logout(request)
+    return home(request)

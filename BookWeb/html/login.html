@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Log In To BookBazaar</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>Log In To BookBazaar</h1>
+    <p>{{ status }}</p>
+    <form method="post" action="/login">
+      {% csrf_token %}
+      <table>
+	<tr>
+	  <td>Username</td>
+	  <td><input type="text" name="username" /></td>
+	</tr>      
+	<tr>
+	  <td>Password</td>
+	  <td><input type="password" name="password" /></td>
+	</tr>
+	<tr>
+      	  <td><input type="submit" name="Submit" value="Submit" /></td>
+	  <td><input type="button" name="Register" value="Register" onclick="location.href='/create_user'" /></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
