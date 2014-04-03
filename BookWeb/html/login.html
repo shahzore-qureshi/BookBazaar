@@ -2,27 +2,46 @@
 <html>
   <head>
     <title>Log In To BookBazaar</title>
-    <meta charset="utf-8">
+    {% include 'html/head_template.html' %}
   </head>
   <body>
-    <h1>Log In To BookBazaar</h1>
-    <p>{{ status }}</p>
-    <form method="post" action="/login">
-      {% csrf_token %}
-      <table>
-	<tr>
-	  <td>Username</td>
-	  <td><input type="text" name="username" /></td>
-	</tr>      
-	<tr>
-	  <td>Password</td>
-	  <td><input type="password" name="password" /></td>
-	</tr>
-	<tr>
-      	  <td><input type="submit" name="Submit" value="Submit" /></td>
-	  <td><input type="button" name="Register" value="Register" onclick="location.href='/create_user'" /></td>
-        </tr>
-      </table>
+    <div class="masthead segment">
+      	<h1>Log In To BookBazaar</h1>
+    </div>
+    <br><br>
+    <form id="loginForm" method="post" action="/login">
+      <div class="ui segment form" style="width:80%; margin:0 auto;">
+        <div class="ui error message">
+          <div class="header">
+            {{ status }}
+          </div>
+        </div>
+      	{% csrf_token %}
+        <div class="field">
+          <label>Username</label>
+          <div class="ui left labeled icon input">
+            <input type="text" name="username">
+            <i class="user icon"></i>
+            <div class="ui corner label">
+              <i class="icon asterisk"></i>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <div class="ui left labeled icon input">
+            <input type="password" name="password">
+            <i class="lock icon"></i>
+            <div class="ui corner label">
+              <i class="icon asterisk"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="ui blue submit button" onclick="document.forms['loginForm'].submit()">Login</div> 
+            <div class="ui green register button" onclick="location.href='/create_user'">Register</div> 
+        </div>
+      </div>
     </form>
   </body>
 </html>

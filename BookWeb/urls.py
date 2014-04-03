@@ -9,7 +9,8 @@ urlpatterns = patterns('',
     url(r'^$', 'BookWeb.views.home', name='home'),
     url(r'^create_user$', 'BookWeb.views.create_user', name='create_user'),
     url(r'^login$', 'BookWeb.views.login', name='login'), 
-    url(r'^logout$', 'BookWeb.views.logout', name='logout') 
+    url(r'^logout$', 'BookWeb.views.logout', name='logout'), 
+    # url(r'^css/', include) 
 
     # url(r'^BookBazaar/', include('BookBazaar.foo.urls')),
 
