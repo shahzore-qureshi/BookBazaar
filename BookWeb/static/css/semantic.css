@@ -94,6 +94,10 @@
            Standard
 *******************************/
 
+body {
+  font-family: "Helvetica Neue", "Helvetica", Arial;
+}
+
 /*--------------
     Masthead
 ---------------*/

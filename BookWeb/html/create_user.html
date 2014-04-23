@@ -5,38 +5,158 @@
     {% include 'html/head_template.html' %}
   </head>
   <body>
-    <h1>Create Your Account</h1>
-    <form method="post" action="/create_user">
-      {% csrf_token %}
-      <table>
-        <tr>
-	  <td>First Name</td>
-	  <td><input type="text" name="firstname" /></td>
-	</tr>
-	<tr>
-	  <td>Last Name</td>
-	  <td><input type="text" name="lastname" /></td>
-	</tr>
-	<tr>
-	  <td>Username</td>
-	  <td><input type="text" name="username" /></td>
-	</tr>      
-	<tr>
-	  <td>Email</td>
-	  <td><input type="text" name="email" /></td>
-	</tr>      
-	<tr>
-	  <td>Password</td>
-	  <td><input type="password" name="password" /></td>
-	</tr>
-	<tr>
-	  <td>Confirm Password</td>
-	  <td><input type="password" name="confirm_password" /></td>
-	</tr>
-	<tr>
-      	  <td><input type="submit" name="Submit" value="Submit" /></td>
-	</tr>
-      </table>
+    <div class="masthead segment">
+      <h1>Create Your Account</h1>
+    </div>
+    <br><br>
+    <form class="ui segment form"  style="width:300px; margin:0 auto;" id="createUserForm" method="post" action="/create_user">
+        {% csrf_token %}
+        <div class="field">
+          <label>First Name</label>
+          <div class="ui left labeled icon input">
+            <input type="text" name="firstname">
+            <i class="user icon"></i>
+            <div class="ui corner label">
+              <i class="icon asterisk"></i>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <div class="ui left labeled icon input">
+            <input type="text" name="lastname">
+            <i class="user icon"></i>
+            <div class="ui corner label">
+              <i class="icon asterisk"></i>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Username</label>
+          <div class="ui left labeled icon input">
+            <input type="text" name="username">
+            <i class="user icon"></i>
+            <div class="ui corner label">
+              <i class="icon asterisk"></i>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <div class="ui left labeled icon input">
+            <input type="text" name="email">
+            <i class="user icon"></i>
+            <div class="ui corner label">
+              <i class="icon asterisk"></i>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <div class="ui left labeled icon input">
+            <input type="password" name="password">
+            <i class="lock icon"></i>
+            <div class="ui corner label">
+              <i class="icon asterisk"></i>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Confirm Password</label>
+          <div class="ui left labeled icon input">
+            <input type="password" name="confirm_password">
+            <i class="lock icon"></i>
+            <div class="ui corner label">
+              <i class="icon asterisk"></i>
+            </div>
+          </div>
+        </div>
+        <div class="ui blue submit button" >Create Account</div>
     </form>
+    <!-- Script that validates input fields. -->
+    <script>
+    $('.ui.form')
+      .form(
+      {
+        firstName: {
+          identifier : 'firstname',
+          rules: [
+            {
+              type : 'empty',
+              prompt : 'Please enter your first name'
+            }
+          ]
+        },
+        lastName: {
+          identifier : 'lastname',
+          rules: [
+            {
+              type : 'empty',
+              prompt : 'Please enter your last name'
+            }
+          ]
+        },
+        userName: {
+          identifier : 'username',
+          rules: [
+            {
+              type : 'empty',
+              prompt : 'Please enter your username'
+            }
+          ]
+        },
+        email: {
+          identifier : 'email',
+          rules: [
+            {
+              type : 'email',
+              prompt : 'Please enter a valid email address'
+            }
+          ]
+        },
+        password: {
+          identifier : 'password',
+          rules: [
+            {
+              type : 'empty',
+              prompt : 'Please enter your password'
+            },
+            {
+              type : 'length[8]',
+              prompt : 'Please enter 8 or more characters'
+            }
+          ]
+        },
+        confirmPassword: {
+          identifier : 'confirm_password',
+          rules: [
+            {
+              type : 'empty',
+              prompt : 'Please enter your password again'
+            },
+            {
+              type : 'match[password]',
+              prompt : 'Passwords do not match'
+            }
+          ]
+        }
+      },
+      {
+        inline : true,
+        on : 'blur',
+        onSuccess : function() {
+          console.log("login successful");
+          return true;
+        }
+      }
+    );
+
+    $(document).ready(function() {
+      $('.submit.button').on('click', function() {
+        $('.ui.form').form('validate form');
+      });
+    });
+     
+    </script>
   </body>
 </html>
