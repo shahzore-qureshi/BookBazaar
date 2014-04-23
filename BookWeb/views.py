@@ -1,6 +1,6 @@
 # Create your views here.
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 import logging
@@ -9,7 +9,7 @@ def home(request):
     if request.user.is_authenticated():
       return render(request, "html/home.html", {})
     else:
-      return login(request)
+      return redirect('login')
 
 def create_user(request):
     if request.method == 'POST':
@@ -29,7 +29,7 @@ def login(request):
           print("User is valid, active and authenticated")
           status = 'valid'
           auth_login(request, user)
-          return home(request)
+          return redirect('home')
         else:
           print("Account is currently disabled. Please try again later.")
           status = 'Account is currently disabled. Please try again later.'
@@ -42,4 +42,4 @@ def login(request):
 
 def logout(request):
     auth_logout(request)
-    return home(request)
+    return redirect('home')
