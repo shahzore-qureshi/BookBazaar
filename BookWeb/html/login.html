@@ -9,9 +9,9 @@
       	<h1>Log In To BookBazaar</h1>
     </div>
     <br><br>
-    <form id="loginForm" method="post" action="/login">
-      <div class="ui segment form error" style="width:300px; margin:0 auto;">
-        <div class="ui error message">
+    <form id="loginForm" class="ui segment form" style="width:300px; margin:0 auto;" method="post" action="/login">
+        <div id="statusMessage" class="ui error message" style="display:block;">
+          <i class="close icon"></i>
           <div class="header">
             {{ status }}
           </div>
@@ -38,10 +38,74 @@
           </div>
         </div>
         <div class="row">
-            <div class="ui blue submit button" onclick="document.forms['loginForm'].submit()">Login</div> 
+            <div class="ui blue submit button">Login</div> 
             <div class="ui green register button" onclick="location.href='/create_user'">Register</div> 
         </div>
-      </div>
     </form>
+    <!-- Script that validates input fields. -->
+    <script>
+    $('.ui.form')
+      .form(
+      {
+        userName: {
+          identifier : 'username',
+          rules: [
+            {
+              type : 'empty',
+              prompt : 'Please enter your username'
+            }
+          ]
+        },
+        password: {
+          identifier : 'password',
+          rules: [
+            {
+              type : 'empty',
+              prompt : 'Please enter your password'
+            },
+            {
+              type : 'length[8]',
+              prompt : 'Please enter 8 or more characters'
+            }
+          ]
+        }
+      },
+      {
+        inline : true,
+        on : 'blur',
+        onSuccess : function() {
+          console.log("login successful");
+          return true;
+        }
+      }
+    );
+
+    $(document).ready(function() {
+      //Validate input when submit button is clicked.
+      //If successful, onSuccess (above) is called.
+      $('.submit.button').on('click', function() {
+        $('.ui.form').form('validate form');
+      });
+
+      //Display error message if present.
+      var error = "{{ status }}";
+      if (error != 'none') {
+        console.log("error found: " + error);
+        $('#statusMessage').show();
+      }
+      else
+        $('#statusMessage').hide();
+
+
+      //Allow user to close the error message
+      //via clicking the X button.
+      $('.message .close').on('click', function() {
+        $(this).closest('.message').fadeOut();
+      });
+      
+    });
+     
+    </script>
+
   </body>
 </html>

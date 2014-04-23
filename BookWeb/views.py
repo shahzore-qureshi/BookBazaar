@@ -22,7 +22,7 @@ def create_user(request):
 def login(request):
     if request.method == 'POST':
       user = authenticate(username=request.POST["username"], password=request.POST["password"])
-      status = 'failed'
+      status = 'Unknown error. Please try again later.'
       if user is not None:
         # the password verified for the user
         if user.is_active:
@@ -31,14 +31,14 @@ def login(request):
           auth_login(request, user)
           return home(request)
         else:
-          print("The password is valid, but the account has been disabled!")
-          status = 'disabled'
+          print("Account is currently disabled. Please try again later.")
+          status = 'Account is currently disabled. Please try again later.'
       else:
         # the authentication system was unable to verify the username and password
-        status = 'failed'
+        status = 'Username and/or password is incorrect.'
       return render(request, "html/login.html", {'status':status})
     elif request.method == 'GET':
-      return render(request, "html/login.html", {'status':''})
+      return render(request, "html/login.html", {'status':'none'})
 
 def logout(request):
     auth_logout(request)
