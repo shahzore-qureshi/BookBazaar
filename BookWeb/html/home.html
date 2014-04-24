@@ -1,30 +1,20 @@
 <!doctype html>
 <html>
   <head>
-    <title>Welcome to BookBaazar</title>
-    <meta charset="utf-8">
+    <title>Welcome to Book Baazar</title>
+    {% include 'html/head_template.html' %}
   </head>
   <body>
-    <h1>Main Menu</h1>
-    <table>
-      <tr>
-	<td>
-	  Your Books
-	</td>
-      </tr>
-      <tr>
-	<td>
-          Search for Books
-        </td>
-      </tr>
-      <tr>
-	<td>
-          Options
-        </td>
-      </tr>
-      <tr>
-	<td><input type="button" name="Log Out" value="Log Out" onclick="location.href='/logout'" /></td>
-     </tr>
-    </table>
+    {% include 'html/nav_template.html' %}
+    <div class = "masthead segment">
+      <h1>TCNJ Book Bazaar</h1>
+    </div>
+    <br>
+    <div class="one column grid" style="text-align: center;">
+      <div class="ui icon input large" style="width:80%; display: inline-block;">
+        <input placeholder="Search for a book..." type="text">
+        <i class="search link icon"></i>
+      </div>
+    </div>
   </body>
 </html>
