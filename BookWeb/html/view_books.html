@@ -1,0 +1,16 @@
+<html>
+  <body>
+    {% if books %}
+      {% for book in books %}
+        {{ book.title }} <br>
+        {{ book.author }} <br>
+        {{ book.isbn }} <br>
+        {{ book.condition }} <br>
+        ${{ book.price }} <br>
+        {{ book.course }} <br>
+      {% endfor %}
+    {% else %}
+      No books found.
+    {% endif %}
+  </body>
+</html>

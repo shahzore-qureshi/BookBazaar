@@ -2,6 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from BookWeb.models import Book
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 import logging
 
@@ -43,3 +44,7 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('home')
+
+def view_books(request):
+    books = Book.objects.filter(id=request.user.id).values()
+    return render(request, "html/view_books.html", {"books" : books})
